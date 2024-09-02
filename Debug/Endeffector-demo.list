@@ -184,8 +184,8 @@ int main(void)
  8000260:	2110      	movs	r1, #16
  8000262:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000266:	f000 fd2b 	bl	8000cc0 <HAL_GPIO_WritePin>
-		  HAL_Delay(30);
- 800026a:	201e      	movs	r0, #30
+		  HAL_Delay(10);
+ 800026a:	200a      	movs	r0, #10
  800026c:	f000 fa96 	bl	800079c <HAL_Delay>
 
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
@@ -208,8 +208,8 @@ int main(void)
  8000296:	2110      	movs	r1, #16
  8000298:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800029c:	f000 fd10 	bl	8000cc0 <HAL_GPIO_WritePin>
-		  HAL_Delay(30);
- 80002a0:	201e      	movs	r0, #30
+		  HAL_Delay(10);
+ 80002a0:	200a      	movs	r0, #10
  80002a2:	f000 fa7b 	bl	800079c <HAL_Delay>
  80002a6:	e799      	b.n	80001dc <main+0x14>
 	  }
@@ -240,8 +240,8 @@ int main(void)
  80002dc:	2110      	movs	r1, #16
  80002de:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80002e2:	f000 fced 	bl	8000cc0 <HAL_GPIO_WritePin>
-		  HAL_Delay(30);
- 80002e6:	201e      	movs	r0, #30
+		  HAL_Delay(10);
+ 80002e6:	200a      	movs	r0, #10
  80002e8:	f000 fa58 	bl	800079c <HAL_Delay>
 
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
@@ -264,8 +264,8 @@ int main(void)
  8000312:	2110      	movs	r1, #16
  8000314:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000318:	f000 fcd2 	bl	8000cc0 <HAL_GPIO_WritePin>
-		  HAL_Delay(30);
- 800031c:	201e      	movs	r0, #30
+		  HAL_Delay(10);
+ 800031c:	200a      	movs	r0, #10
  800031e:	f000 fa3d 	bl	800079c <HAL_Delay>
  8000322:	e75b      	b.n	80001dc <main+0x14>
 	  }
