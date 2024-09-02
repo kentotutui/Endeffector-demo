@@ -108,52 +108,58 @@ int main(void)
 	  HAL_Delay(1000);
 	  */
 
-	  //プッシュスイッチでLチカ
-	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4) == 1){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+	  //タクトスイッチでLチカ
+	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4) == 1){//タクトスイッチの入力(負論理)
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);//LEDを点灯
 	  }
 	  else{
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);//LEDを消灯
 	  }
 
-	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_5) == 1){
-	  	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_5) == 1){//タクトスイッチの入力(負論理)
+	  	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);//LEDを点灯
 	  }
 	  else{
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);//LEDを消灯
 	  }
 
-	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4) == 0){
+	  //モータドライバICをPHASE/ENABLEモードで動かす
+	  //GPIOB,GPIO_PIN_4でモータ側にスライド
+	  if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4) == 0){//タクトスイッチが押されたとき
+		  //Aを出力
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);//A6 APHASE
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);//A5 AENBL
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);//A4 BPHASE
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);//A3 BENBL
-		  HAL_Delay(10);
-
+		  HAL_Delay(10);//10ms周期(100Hz)ここの数字をいじると，スライダの移動速度が変動する．電圧によってはこの周期だと動かないことがある．
+		  //Bを出力
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 		  HAL_Delay(10);
 	  }
+	  //GPIOB,GPIO_PIN_5でモータと反対側にスライド
 	  else if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_5) == 0){
+		  //Aを出力
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 		  HAL_Delay(10);
-
+		  //Bを出力
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 		  HAL_Delay(10);
 	  }
+	  //両方のスイッチが押されていないとき，ENABLEをRESETにしてモータが動作しないようにしている
 	  else if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4) == 1 && HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_5) == 1){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);//A6 APHASE
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);//A5 AENBL
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);//A4 BPHASE
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);//A3 BENBL
 	  }
 
     /* USER CODE END WHILE */
