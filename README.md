@@ -5,4 +5,5 @@
 
 インストールにアカウント登録が必要なため行っておく．
 
-
+## 使うマイコンボード
+[NUCLEO-F303K8](https://os.mbed.com/platforms/ST-Nucleo-F303K8/)
